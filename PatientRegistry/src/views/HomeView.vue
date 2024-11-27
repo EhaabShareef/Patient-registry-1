@@ -16,7 +16,7 @@ const formData = ref({
 });
 
 // Define the API base URL (you can replace this with your actual backend URL)
-const apiUrl = 'https://localhost/api'; // Change this to your backend URL
+const apiUrl = 'https://localhost:8000/api'; // Change this to your backend URL
 
 // Axios client instance
 const apiClient = axios.create({
@@ -30,13 +30,13 @@ const apiClient = axios.create({
 const submitForm = async () => {
   try {
     // Send combined form data (patient + address) to the backend
-    const response = await apiClient.post('/api/patients', formData.value);
+    const response = await apiClient.post('/patients', formData.value);
     console.log('Form Submitted:', response.data);
 
     // You can display a success message or redirect the user
     alert('Patient and address information saved successfully');
 
-    // Optionally, you could clear the form fields after submission
+    // Optionally, clear the form fields after submission
     formData.value = {
       name: '',
       date_of_birth: '',
@@ -49,7 +49,6 @@ const submitForm = async () => {
       }
     };
   } catch (error) {
-    // Log error and show a failure message
     console.error('Error submitting form:', error);
     alert('There was an error submitting the data');
   }
@@ -57,125 +56,103 @@ const submitForm = async () => {
 </script>
 
 <template>
-  <div class="form-container">
-    <!-- Combined Form for Patient and Address Information -->
-    <div class="form-section">
-      <h2>Patient Information</h2>
-      <form @submit.prevent="submitForm">
+  <div class=" bg-gray-100 flex items-center justify-center p-6 rounded-lg">
+    <div class="bg-white shadow rounded-lg w-full max-w-md p-6">
+      <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">Patient Information</h2>
+      <form @submit.prevent="submitForm" class="space-y-4">
         <!-- Personal Information -->
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" v-model="formData.name" placeholder="Enter your name" required />
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input
+            type="text"
+            id="name"
+            v-model="formData.name"
+            class="mt-1 py-2 px-3 text-black block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+            placeholder="Enter your name"
+            required
+          />
         </div>
 
-        <div class="form-group">
-          <label for="date_of_birth">Date of Birth</label>
-          <input type="date" id="date_of_birth" v-model="formData.date_of_birth" required />
+        <div>
+          <label for="date_of_birth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+          <input
+            type="date"
+            id="date_of_birth"
+            v-model="formData.date_of_birth"
+            class="mt-1 py-2 px-3 text-black block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+            required
+          />
         </div>
 
-        <div class="form-group">
-          <label for="national_id">National ID</label>
-          <input type="text" id="national_id" v-model="formData.national_id" placeholder="Enter your National ID" required />
+        <div>
+          <label for="national_id" class="block text-sm font-medium text-gray-700">National ID</label>
+          <input
+            type="text"
+            id="national_id"
+            v-model="formData.national_id"
+            class="mt-1 py-2 px-3 text-black block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+            placeholder="Enter your National ID"
+            required
+          />
         </div>
 
         <!-- Address Information -->
-        <h3>Address Information</h3>
-        <div class="form-group">
-          <label for="island_id">Island ID</label>
-          <input type="text" id="island_id" v-model="formData.address.island_id" placeholder="Enter Island ID" required />
+        <h3 class="text-xl font-semibold text-gray-800">Address Information</h3>
+        <div>
+          <label for="island_id" class="block text-sm font-medium text-gray-700">Island ID</label>
+          <input
+            type="text"
+            id="island_id"
+            v-model="formData.address.island_id"
+            class="mt-1 py-2 px-3 text-black block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+            placeholder="Enter Island ID"
+            required
+          />
         </div>
 
-        <div class="form-group">
-          <label for="street">Street</label>
-          <input type="text" id="street" v-model="formData.address.street" placeholder="Enter Street Name" required />
+        <div>
+          <label for="street" class="block text-sm font-medium text-gray-700">Street</label>
+          <input
+            type="text"
+            id="street"
+            v-model="formData.address.street"
+            class="mt-1 py-2 px-3 text-black block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+            placeholder="Enter Street Name"
+            required
+          />
         </div>
 
-        <div class="form-group">
-          <label for="city">City</label>
-          <input type="text" id="city" v-model="formData.address.city" placeholder="Enter City" required />
+        <div>
+          <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+          <input
+            type="text"
+            id="city"
+            v-model="formData.address.city"
+            class="mt-1 py-2 px-3 text-black block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+            placeholder="Enter City"
+            required
+          />
         </div>
 
-        <div class="form-group">
-          <label for="house_name">House Name</label>
-          <input type="text" id="house_name" v-model="formData.address.house_name" placeholder="Enter House Name" required />
+        <div>
+          <label for="house_name" class="block text-sm font-medium text-gray-700">House Name</label>
+          <input
+            type="text"
+            id="house_name"
+            v-model="formData.address.house_name"
+            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+            placeholder="Enter House Name"
+            required
+          />
         </div>
 
-        <button type="submit" class="submit-btn">Submit</button>
+        <button
+          type="submit"
+          class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+        >
+          Submit
+        </button>
       </form>
     </div>
   </div>
 </template>
-
-<style scoped>
-.form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding: 20px;
-}
-
-.form-section {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  text-align: center;
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-h3 {
-  text-align: center;
-  font-size: 20px;
-  color: #333;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 5px;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-  color: #333;
-}
-
-input:focus {
-  outline: none;
-  border-color: #5cb85c;
-}
-
-button.submit-btn {
-  width: 100%;
-  padding: 12px;
-  background-color: #5cb85c;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button.submit-btn:hover {
-  background-color: #4cae4c;
-}
-</style>

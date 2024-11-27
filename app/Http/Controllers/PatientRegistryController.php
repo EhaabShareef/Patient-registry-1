@@ -9,26 +9,21 @@ use Illuminate\Http\Request;
 
 class PatientRegistryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
+    // get all patients
     public function index()
     {
         $patients = PatientRegistry::all();
         return PatientRegistryResource::collection($patients);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // not needed for API call
     public function create()
     {
         return response()->json(['message' => 'Create new patient form']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // create address and then patient data
     public function store(Request $request)
     {
 
@@ -63,9 +58,7 @@ class PatientRegistryController extends Controller
         return new PatientRegistryResource($patient);
     }
 
-    /**
-     * Display the specified resource.
-     */
+    //show single patient by id
     public function show(string $id)
     {
 
@@ -75,9 +68,7 @@ class PatientRegistryController extends Controller
         return new PatientRegistryResource($patient);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    //not need on API
     public function edit(string $id)
     {
 
@@ -85,9 +76,7 @@ class PatientRegistryController extends Controller
         return response()->json($patient);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // update patient details and address
     public function update(Request $request, string $id)
     {
 
@@ -134,9 +123,7 @@ class PatientRegistryController extends Controller
         return new PatientRegistryResource($patient);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // delete patient on patient_id cascade address
     public function destroy(string $id)
     {
 

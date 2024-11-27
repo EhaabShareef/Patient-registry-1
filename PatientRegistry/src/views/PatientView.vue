@@ -2,9 +2,9 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
-const apiUrl = 'https://localhost'; // Change this to your backend URL
+const apiUrl = 'https://localhost:8000'; // backend URL
 
-// Axios client instance
+// axios
 const apiClient = axios.create({
   baseURL: apiUrl,
   headers: {
@@ -32,81 +32,38 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="form-container">
-    <div class="table-section">
-      <h2>Patients Records</h2>
-      <table class="patients-table">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Date of Birth</th>
-          <th>National ID</th>
-          <th>Island ID</th>
-          <th>Street</th>
-          <th>City</th>
-          <th>House Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="patient in patients" :key="patient.id">
-          <td>{{ patient.name }}</td>
-          <td>{{ patient.date_of_birth }}</td>
-          <td>{{ patient.national_id }}</td>
-          <td>{{ patient.address.island_id }}</td>
-          <td>{{ patient.address.street }}</td>
-          <td>{{ patient.address.city }}</td>
-          <td>{{ patient.address.house_name }}</td>
-        </tr>
-        </tbody>
-      </table>
+  <div class="min-h-screen bg-gray-100 py-10 rounded-lg">
+    <div class="max-w-8xl mx-auto px-4">
+      <div class="bg-white shadow rounded-lg p-6">
+        <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Patient Records</h2>
+        <table class="table-auto w-full border-collapse">
+          <thead>
+            <tr class="bg-green-600 text-white">
+              <th class="px-4 py-2">Name</th>
+              <th class="px-4 py-2">Date of Birth</th>
+              <th class="px-4 py-2">National ID</th>
+              <th class="px-4 py-2">Island ID</th>
+              <th class="px-4 py-2">Street</th>
+              <th class="px-4 py-2">City</th>
+              <th class="px-4 py-2">House Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr 
+              v-for="patient in patients" 
+              :key="patient.id" 
+              class="hover:bg-gray-100">
+              <td class="px-4 py-2">{{ patient.name }}</td>
+              <td class="px-4 py-2">{{ patient.date_of_birth }}</td>
+              <td class="px-4 py-2">{{ patient.national_id }}</td>
+              <td class="px-4 py-2">{{ patient.address.island_id }}</td>
+              <td class="px-4 py-2">{{ patient.address.street }}</td>
+              <td class="px-4 py-2">{{ patient.address.city }}</td>
+              <td class="px-4 py-2">{{ patient.address.house_name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding: 20px;
-}
-
-.table-section {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  text-align: center;
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.patients-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-.patients-table th,
-.patients-table td {
-  padding: 12px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-
-.patients-table th {
-  background-color: #5cb85c;
-  color: white;
-}
-
-.patients-table tbody tr:hover {
-  background-color: #f1f1f1;
-}
-</style>
